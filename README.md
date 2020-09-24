@@ -22,4 +22,13 @@ To come soon
 To come soon
 
 ### Building Notes
-To come soon
+
+```
+docker build -t nolim1t/joinmarket .
+```
+
+### Inspecting the Container
+
+```
+docker run --rm --entrypoint="/bin/bash" -it nolim1t/joinmarket:latest
+```
