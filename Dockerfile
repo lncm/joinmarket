@@ -11,7 +11,9 @@ ARG REPO=https://github.com/JoinMarket-Org/joinmarket-clientserver
 ARG USER=joinmarket
 ARG DIR=/data/
 
-FROM python:3.8.5-slim-buster AS builder
+FROM python:3.8.5-slim-buster AS final
+
+LABEL maintainer="nolim1t (hello@nolim1t.co)"
 
 ARG VERSION
 ARG REPO
@@ -26,11 +28,6 @@ RUN git checkout $VERSION
 
 RUN pip install -r "requirements/base.txt"
 
-
-FROM python:3.8.5-slim-buster as final
-
-LABEL maintainer="nolim1t (hello@nolim1t.co)"
-
 ARG USER
 ARG DIR
 
@@ -39,11 +36,13 @@ RUN adduser --disabled-password \
             --gecos "" \
             "$USER"
 
+#COPY --from=builder /joinmarket-clientserver /joinmarket-clientserver
+#COPY --from=builder /usr/local/bin /usr/local/bin
+#COPY --from=builder  /usr/local/lib/python3.8 /usr/local/lib/python3.8
+
 USER $USER
 RUN mkdir -p $DIR/.joinmarket
 
-COPY --from=builder /usr/local/bin /usr/local/bin
-COPY --from=builder  /usr/local/lib/python3.8 /usr/local/lib/python3.8
 
 ENTRYPOINT ["/usr/local/bin/python3"]
 
