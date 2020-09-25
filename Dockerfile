@@ -20,7 +20,15 @@ ARG REPO
 
 RUN apt-get update && apt-get -y install python3-dev python3-pip git build-essential automake pkg-config libtool libffi-dev libssl-dev libgmp-dev libsodium-dev
 WORKDIR /
+RUN git clone https://github.com/bitcoin-core/secp256k1.git
 RUN git clone $REPO
+
+# Build secp256k1
+WORKDIR /secp256k1
+RUN ./autogen.sh
+RUN ./configure
+RUN make
+RUN make install
 
 # Joinmarket root
 WORKDIR /joinmarket-clientserver
@@ -36,13 +44,11 @@ RUN adduser --disabled-password \
             --gecos "" \
             "$USER"
 
-#COPY --from=builder /joinmarket-clientserver /joinmarket-clientserver
-#COPY --from=builder /usr/local/bin /usr/local/bin
-#COPY --from=builder  /usr/local/lib/python3.8 /usr/local/lib/python3.8
 
 USER $USER
 RUN mkdir -p $DIR/.joinmarket
 
+WORKDIR $DIR
 
-ENTRYPOINT ["/usr/local/bin/python3"]
-
+# Default to joinmarketd
+ENTRYPOINT ["/joinmarket-clientserver/scripts/joinmarketd.py`"]
