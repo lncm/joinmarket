@@ -51,4 +51,4 @@ RUN mkdir -p $DIR/.joinmarket
 WORKDIR $DIR
 
 # Default to joinmarketd
-ENTRYPOINT ["/joinmarket-clientserver/scripts/joinmarketd.py`"]
+ENTRYPOINT ["/joinmarket-clientserver/scripts/joinmarketd.py"]
