@@ -19,7 +19,13 @@ To come soon
 
 ### Maintainer Notes
 
-To come soon
+### Github Action Environment Variables
+
+* `DOCKER_USERNAME` - (required) Username to access docker hub
+* `DOCKER_PASSWORD` - (required) Password associated with the username. Can be a token too.
+* `DOCKER_HUB_USER` - (required) docker hub username if `DOCKER_USERNAME` differs, in this case  an organization. It can be the same too but its required
+* `MAINTAINER_USER`` - (optional) Username for github to use Github Container Registry
+* `MAINTAINER_TOKEN` - (optional) Personal Access token for github which accesses Github Container Registry.
 
 ### Building Notes
 
