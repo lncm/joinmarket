@@ -13,7 +13,16 @@ This automates the process for Joinmarket in a nice docker Container
 
 ## Usage Notes
 
-To come soon
+### Wallettool command
+
+
+```bash
+docker run --rm  -it \
+            --network host \
+            -v /mnt/sd/nolim1t/joinmarket:/data/.joinmarket \
+            --entrypoint="/joinmarket-clientserver/scripts/wallet-tool.py" \
+            lncm/joinmarket:latest --version
+```
 
 ## Build Notes
 
