@@ -21,7 +21,7 @@ docker run --rm  -it \
             --network host \
             -v /mnt/sd/nolim1t/joinmarket:/data/.joinmarket \
             --entrypoint="/joinmarket-clientserver/scripts/wallet-tool.py" \
-            lncm/joinmarket:latest --version
+            lncm/joinmarket:v0.7.0 --version
 ```
 
 ## Build Notes
@@ -45,5 +45,5 @@ docker build -t lncm/joinmarket .
 ### Inspecting the Container
 
 ```
-docker run --rm --entrypoint="/bin/bash" -it lncm/joinmarket:latest
+docker run --rm --entrypoint="/bin/bash" -it lncm/joinmarket:v0.7.0
 ```
