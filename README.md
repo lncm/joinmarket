@@ -24,11 +24,11 @@ To come soon
 ### Building Notes
 
 ```
-docker build -t nolim1t/joinmarket .
+docker build -t lncm/joinmarket .
 ```
 
 ### Inspecting the Container
 
 ```
-docker run --rm --entrypoint="/bin/bash" -it nolim1t/joinmarket:latest
+docker run --rm --entrypoint="/bin/bash" -it lncm/joinmarket:latest
 ```
