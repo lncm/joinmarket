@@ -22,8 +22,8 @@ This automates the process for Joinmarket in a nice docker Container
 PARAM='wallet.jmdat'
 
 docker run --rm  -it --network host \
-        -v /mnt/sd/nolim1t/joinmarket:/data/.joinmarket \
-        -v /mnt/sd/nolim1t/box/bitcoind/data:/data/.bitcoin \
+        -v $HOME/.joinmarket:/data/.joinmarket \
+        -v $HOME/.bitcoin:/data/.bitcoin \
         --entrypoint="/joinmarket-clientserver/scripts/wallet-tool.py" \
         --name joinmarket \
         lncm/joinmarket:v0.7.0 $PARAM
