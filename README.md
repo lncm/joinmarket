@@ -17,11 +17,16 @@ This automates the process for Joinmarket in a nice docker Container
 
 
 ```bash
-docker run --rm  -it \
-            --network host \
-            -v /mnt/sd/nolim1t/joinmarket:/data/.joinmarket \
-            --entrypoint="/joinmarket-clientserver/scripts/wallet-tool.py" \
-            lncm/joinmarket:v0.7.0 --version
+# Param can be 'generate' '--help' or the wallet filename (eg. wallet.jmdat)
+
+PARAM='wallet.jmdat'
+
+docker run --rm  -it --network host \
+        -v /mnt/sd/nolim1t/joinmarket:/data/.joinmarket \
+        -v /mnt/sd/nolim1t/box/bitcoind/data:/data/.bitcoin \
+        --entrypoint="/joinmarket-clientserver/scripts/wallet-tool.py" \
+        --name joinmarket \
+        lncm/joinmarket:v0.7.0 $PARAM
 ```
 
 ## Build Notes
