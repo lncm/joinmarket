@@ -34,6 +34,8 @@ RUN make install
 # Copy from base dir
 # namely genwallet.py which doesn't exist yet
 COPY ./bins/*.py /usr/local/bin
+# Entrypoint for joinmarket
+COPY ./bins/jm-entrypoint.sh /usr/local/bin
 
 # Joinmarket root
 WORKDIR /joinmarket-clientserver
@@ -64,7 +66,12 @@ RUN adduser --disabled-password \
 USER $USER
 RUN mkdir -p $DIR/.joinmarket
 
+# Copy templates to home directory
+COPY ./templates/joinmarket.cfg-dist $DIR
+
 WORKDIR $DIR
 
 # Default to joinmarketd
-ENTRYPOINT ["/joinmarket-clientserver/joinmarketd.py", "27183" , "0" , "127.0.0.1"]
+#ENTRYPOINT ["/joinmarket-clientserver/joinmarketd.py", "27183" , "0" , "127.0.0.1"]
+ENTRYPOINT ["jm-entrypoint.sh"]
+
