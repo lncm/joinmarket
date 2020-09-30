@@ -41,7 +41,6 @@ WORKDIR /joinmarket-clientserver
 RUN if [[ $VERSION != "master" ]]; then git checkout $VERSION; fi
 
 # Copy some useful utils into /usr/local/bin
-RUN cp scripts/joinmarketd.py /usr/local/bin/joinmarketd
 RUN cp scripts/yg-privacyenhanced.py /usr/local/bin
 RUN cp scripts/wallet-tool.py /usr/local/bin
 RUN cp scripts/add-utxo.py /usr/local/bin
@@ -68,4 +67,4 @@ RUN mkdir -p $DIR/.joinmarket
 WORKDIR $DIR
 
 # Default to joinmarketd
-ENTRYPOINT ["joinmarketd", "27183" , "0" , "127.0.0.1"]
+ENTRYPOINT ["/joinmarket-clientserver/joinmarketd.py", "27183" , "0" , "127.0.0.1"]
