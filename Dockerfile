@@ -18,6 +18,7 @@ LABEL maintainer="nolim1t (hello@nolim1t.co)"
 ARG VERSION
 ARG REPO
 
+# Setup dependencies
 RUN apt-get update && apt-get -y install python3-dev python3-pip git build-essential automake pkg-config libtool libffi-dev libssl-dev libgmp-dev libsodium-dev
 WORKDIR /
 RUN git clone https://github.com/bitcoin-core/secp256k1.git
@@ -30,9 +31,25 @@ RUN ./configure
 RUN make
 RUN make install
 
+# Copy from base dir
+# namely genwallet.py which doesn't exist yet
+COPY ./bins/*.py /usr/local/bin
+
 # Joinmarket root
 WORKDIR /joinmarket-clientserver
-RUN git checkout $VERSION
+# If version is not master then checkout a different branch
+RUN if [[ $VERSION != "master" ]]; then git checkout $VERSION; fi
+
+# Copy some useful utils into /usr/local/bin
+RUN cp scripts/joinmarketd.py /usr/local/bin/joinmarketd
+RUN cp scripts/yg-privacyenhanced.py /usr/local/bin
+RUN cp scripts/wallet-tool.py /usr/local/bin
+RUN cp scripts/add-utxo.py /usr/local/bin
+RUN cp scripts/sendpayment.py /usr/local/bin
+RUN cp scripts/sendtomany.py /usr/local/bin
+RUN cp scripts/receive-payjoin.py /usr/local/bin
+RUN cp scripts/convert_old_wallet.py /usr/local/bin
+RUN cp scripts/tumbler.py /usr/local/bin
 
 RUN pip install -r "requirements/base.txt"
 
@@ -51,4 +68,4 @@ RUN mkdir -p $DIR/.joinmarket
 WORKDIR $DIR
 
 # Default to joinmarketd
-ENTRYPOINT ["/joinmarket-clientserver/scripts/joinmarketd.py", "27183" , "0" , "127.0.0.1"]
+ENTRYPOINT ["joinmarketd", "27183" , "0" , "127.0.0.1"]
