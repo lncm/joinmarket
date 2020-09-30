@@ -19,7 +19,7 @@ ARG VERSION
 ARG REPO
 
 # Setup dependencies
-RUN apt-get update && apt-get -y install python3-dev python3-pip git build-essential automake pkg-config libtool libffi-dev libssl-dev libgmp-dev libsodium-dev
+RUN apt-get update && apt-get -y install python3-dev python3-pip git build-essential automake pkg-config libtool libffi-dev libssl-dev libgmp-dev libsodium-dev pwgen
 WORKDIR /
 RUN git clone https://github.com/bitcoin-core/secp256k1.git
 RUN git clone $REPO
