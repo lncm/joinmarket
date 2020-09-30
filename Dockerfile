@@ -40,7 +40,7 @@ COPY ./bins/jm-entrypoint.sh /usr/local/bin
 # Joinmarket root
 WORKDIR /joinmarket-clientserver
 # If version is not master then checkout a different branch
-RUN if [[ $VERSION != "master" ]]; then git checkout $VERSION; fi
+RUN git checkout $VERSION
 
 # Copy some useful utils into /usr/local/bin
 RUN cp scripts/yg-privacyenhanced.py /usr/local/bin

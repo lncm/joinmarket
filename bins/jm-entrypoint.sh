@@ -15,7 +15,6 @@ JMWALLET=wallet.jmdat
 JMSEEDFILE=${JMHOMEDIR}/jm-wallet-seed
 JMWALLETPASS=${JMHOMEDIR}/jm-wallet-password
 # Genwallet.py location
-GENWALLETCMD=/usr/local/bin/genwallet.py
 # dep check
 check_dependencies () {
     for cmd in "$@"; do
@@ -31,12 +30,24 @@ check_dependencies pwgen
 if [ ! -f $JMWALLETDIR/$JMWALLET ]; then
     if [ !  -f $JMWALLETPASS ]; then
         echo "Generating wallet password..."
-        echo `pwgen -s 21 -1 -v -c -0` > $JMWALLETPASS
+        GENPASS=$(pwgen -s 21 -1 -v -c -0)
+        echo $GENPASS > $JMWALLETPASS
     fi
     echo "Creating wallet..."
-    $walletout=$(${GENWALLETCMD} ${JMWALLET} $(cat $JMWALLETPASS))
-    recoveryseed=$(echo "$walletout" | grep 'recovery_seed')
-    echo "$recoveryseed" | cut -d ':' -f2 > $JMSEEDFILE
+    WALLETOUT=`/usr/local/bin/genwallet.py $JMWALLET $GENPASS`
+    RECOVERYSEED=$(echo "$WALLETOUT" | grep 'recovery_seed')
+    if [[ ! -z $RECOVERYSEED ]]; then
+        #echo $RECOVERYSEED
+        SEEDONLY=`echo "$RECOVERYSEED" | cut -d ':' -f2`
+        #echo $SEEDONLY
+        echo $SEEDONLY > $JMSEEDFILE
+    else
+        echo "Error generating wallet"
+        rm $JMWALLETDIR/$JMWALLET
+        exit 1
+    fi
+    echo "Wallet created"
+    exit 0
 else
     echo "Wallet already created"
 fi
