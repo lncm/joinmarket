@@ -19,10 +19,25 @@ The following environment variables control the configuration for `jm-entrypoint
 
 * RPCUSER (bitcoin rpc user. default is lncm)
 * RPCPASS (bitcoin rpc pass. default is lncm)
-* RPCHOST (bitcoin rpc hostname. default is localhost)
+* RPCHOST (bitcoin rpc hostname. default is 127.0.0.1)
 * RPCPORT (bitcoin rpc port. default is 8332)
 * TORADDR (socks5 address for tor. default is localhost)
 * TORPORT (socks5 port for tor. default is 9050)
+
+### Example Default Usage
+
+Here is the example usage which uses the default entrypoint
+
+```bash
+docker run --rm  -it --network host \
+        -v $HOME/.joinmarket:/data/.joinmarket \
+        -v $HOME/.bitcoin:/data/.bitcoin \
+        --name joinmarket \
+        -e RPCPASS="btcrpcpassword" \
+        -e RPCUSER="bitcoindrpcuser" \ 
+        lncm/joinmarket
+
+```
 
 ### Wallettool command
 
