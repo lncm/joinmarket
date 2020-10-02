@@ -18,9 +18,9 @@ JMWALLETPASS=${JMHOMEDIR}/jm-wallet-password
 # Other env variables (for config)
 RPCUSER="${RPCUSER:-lncm}"          # Default username: lncm
 RPCPASS="${RPCPASS:-lncm}"          # Default password: lncm
-RPCHOST="${RPCHOST:-localhost}"     # Default hostname: localhost
+RPCHOST="${RPCHOST:-127.0.0.1}"     # Default hostname: 127.0.0.1
 RPCPORT="${RPCPORT:-8332}"          # Default port: 8332
-TORADDR="${TORADDR:-localhost}"     # Default address: localhost
+TORADDR="${TORADDR:-127.0.0.1}"     # Default address:  127.0.0.1
 TORPORT="${TORPORT:-9050}"          # Default port for tor: 9050
 
 # Genwallet.py location
@@ -61,11 +61,8 @@ if [ ! -f $JMWALLETDIR/$JMWALLET ]; then
     echo "Creating wallet..."
     WALLETOUT=`/usr/local/bin/genwallet.py $JMWALLET $GENPASS`
     RECOVERYSEED=$(echo "$WALLETOUT" | grep 'recovery_seed')
-    echo $WALLETOUT
     if [[ ! -z $RECOVERYSEED ]]; then
-        #echo $RECOVERYSEED
         SEEDONLY=`echo "$RECOVERYSEED" | cut -d ':' -f2`
-        #echo $SEEDONLY
         echo $SEEDONLY > $JMSEEDFILE
     else
         echo "Error generating wallet"
