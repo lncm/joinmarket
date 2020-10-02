@@ -13,6 +13,17 @@ This automates the process for Joinmarket in a nice docker Container
 
 ## Usage Notes
 
+### Environment variables
+
+The following environment variables control the configuration for `jm-entrypoint.sh`
+
+* RPCUSER (bitcoin rpc user. default is lncm)
+* RPCPASS (bitcoin rpc pass. default is lncm)
+* RPCHOST (bitcoin rpc hostname. default is localhost)
+* RPCPORT (bitcoin rpc port. default is 8332)
+* TORADDR (socks5 address for tor. default is localhost)
+* TORPORT (socks5 port for tor. default is 9050)
+
 ### Wallettool command
 
 
