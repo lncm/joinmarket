@@ -4,7 +4,7 @@
 
 * **Ensure the bug was not already reported** by checking out the following repositories: [(1)](https://gitlab.com/nolim1t/joinmarket-docker/-/issues) [(2)](https://github.com/lncm/joinmarket/issues)
 
-* If you're unable to find an open issue addressing the problem, open a new one from one of the following links - [()](https://gitlab.com/nolim1t/joinmarket-docker/-/issues/new) or [(2)](https://github.com/lncm/joinmarket/issues/new). Be sure to include an accurate description, and any sample code.
+* If you're unable to find an open issue addressing the problem, open a new one from one of the following links - [(1)](https://gitlab.com/nolim1t/joinmarket-docker/-/issues/new) or [(2)](https://github.com/lncm/joinmarket/issues/new). Be sure to include an accurate description, and any sample code.
 
 #### **Did you write a patch that fixes a bug?**
 
