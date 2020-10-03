@@ -18,6 +18,8 @@
 
 We could definetely use some UX, QA or Build Systems support on this project. Open a new issue and mention this.
 
+For those who want to throw some small money, you could do this [here(1)](https://nolim1t.co/tips/) or [here(2)](https://tippin.me/@nolim1t)
+
 
 #### **Getting in touch**
 
