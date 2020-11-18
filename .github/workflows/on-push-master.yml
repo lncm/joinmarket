@@ -17,13 +17,13 @@ jobs:
 
                         - name: Set env variables
                           run: |
-                                  echo "::set-env name=BRANCH::$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//-/g')"
-                                  echo "::set-env name=SHORTSHA::$(git rev-parse --short HEAD)"
-                                  echo "::set-env name=DOCKER_HUB_REPO::joinmarket"
-                                  echo "::set-env name=DOCKER_USERNAME::${{ secrets.DOCKER_USERNAME }}"
-                                  echo "::set-env name=DOCKER_PASSWORD::${{ secrets.DOCKER_PASSWORD }}"
-                                  echo "::set-env name=MAINTAINER_USER::${{ secrets.MAINTAINER_USER }}"
-                                  echo "::set-env name=MAINTAINER_TOKEN::${{ secrets.MAINTAINER_TOKEN }}"
+                                  echo "echo \"BRANCH=$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//-/g')\" >> $GITHUB_ENV"
+                                  echo "echo \"SHORTSHA=$(git rev-parse --short HEAD)\" >> $GITHUB_ENV"
+                                  echo "echo \"DOCKER_HUB_REPO=joinmarket\" >> $GITHUB_ENV"
+                                  echo "echo \"DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }}\" >> $GITHUB_ENV"
+                                  echo "echo \"DOCKER_PASSWORD=${{ secrets.DOCKER_PASSWORD }}\" >> $GITHUB_ENV"
+                                  echo "echo \"MAINTAINER_USER=${{ secrets.MAINTAINER_USER }}\" >> $GITHUB_ENV"
+                                  echo "echo \"MAINTAINER_TOKEN=${{ secrets.MAINTAINER_TOKEN }}\" >> $GITHUB_ENV"
 
                         - name: Show set env variables
                           run: |
