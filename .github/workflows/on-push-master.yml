@@ -1,6 +1,7 @@
 name: Docker build on push
 env:
         DOCKER_CLI_EXPERIMENTAL: enabled
+        ACTIONS_ALLOW_UNSECURE_COMMANDS: true
 
 on:
     push:
@@ -17,24 +18,27 @@ jobs:
 
                         - name: Set env variables
                           run: |
-                                  echo "echo \"BRANCH=$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//-/g')\" >> $GITHUB_ENV"
-                                  echo "echo \"SHORTSHA=$(git rev-parse --short HEAD)\" >> $GITHUB_ENV"
-                                  echo "echo \"DOCKER_HUB_REPO=joinmarket\" >> $GITHUB_ENV"
+                                  echo "::set-env name=BRANCH::$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//-/g')"
+                                  echo "::set-env name=SHORTSHA::$(git rev-parse --short HEAD)"
+                                  echo "::set-env name=DOCKER_HUB_REPO::joinmarket"
+                                  echo "::set-env name=DOCKER_USERNAME::${{ secrets.DOCKER_USERNAME }}"
+                                  echo "::set-env name=DOCKER_PASSWORD::${{ secrets.DOCKER_PASSWORD }}"
+                                  echo "::set-env name=MAINTAINER_USER::${{ secrets.MAINTAINER_USER }}"
+                                  echo "::set-env name=MAINTAINER_TOKEN::${{ secrets.MAINTAINER_TOKEN }}"
 
                         - name: Show set env variables
                           run: |
-                                  source $GITHUB_ENV
-                                  printf "    BRANCH: %s\n"  "$GITHUB_BRANCH"
+                                  printf "    BRANCH: %s\n"  "$BRANCH"
                                   printf "    SHORTSHA: %s\n"  "$SHORTSHA"
                                   printf "    REPO: %s\n" "$GITHUB_REPOSITORY"
                                   printf "    COMMIT ID: %s\n" "$GITHUB_SHA"
-                                  printf "    DOCKER HUB REPO: %s\n" "$DOCKER_HUB_REPO"
+                                  printf "    DOCKER REPO: %s\n" "$DOCKER_HUB_REPO"
                                   printf "    GITHUB_ACTOR: %s\n" "$GITHUB_ACTOR"
                                   printf "    GITHUB_REPOSITORY: %s\n" "$GITHUB_REPOSITORY"
 
                         - name: Login to Docker Hub with specified username
                           run: |
-                                  if [[ ! -z ${{ secrets.DOCKER_PASSWORD }} ]] && [[ ! -z ${{ secrets.DOCKER_USERNAME }} ]]; then 
+                                  if [[ ! -z $DOCKER_PASSWORD ]] && [[ ! -z $DOCKER_USERNAME ]]; then 
                                     echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
                                   else
                                     echo "DOCKER_USERNAME and DOCKER_PASSOWRD must be set!"
@@ -80,8 +84,8 @@ jobs:
 
                         - name: Login and push (master to GHCR with MAINTAINER_USER and MAINTAINER_TOKEN if exists
                           run: |
-                                  if [[ ! -z $secrets.MAINTAINER_TOKEN ]] && [[ ! -z $secrets.MAINTAINER_USER ]]; then  
-                                        echo "$secrets.MAINTAINER_TOKEN" | docker login https://ghcr.io -u "$secrets.MAINTAINER_USER" --password-stdin
+                                  if [[ ! -z $MAINTAINER_TOKEN ]] && [[ ! -z $MAINTAINER_USER ]]; then  
+                                        echo "$secrets.MAINTAINER_TOKEN" | docker login https://ghcr.io -u "$MAINTAINER_USER" --password-stdin
                                         docker buildx build \
                                                 --cache-from "type=local,src=/tmp/.buildx-cache" \
                                                 --cache-to "type=local,dest=/tmp/.buildx-cache" \
