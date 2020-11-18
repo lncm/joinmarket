@@ -23,11 +23,11 @@ jobs:
 
                         - name: Show set env variables
                           run: |
-                                  printf "    BRANCH: %s\n"  "$BRANCH"
-                                  printf "    SHORTSHA: %s\n"  "$SHORTSHA"
+                                  printf "    BRANCH: %s\n"  "$githubGITHUB_BRANCH"
+                                  printf "    SHORTSHA: %s\n"  "$githubSHORTSHA"
                                   printf "    REPO: %s\n" "$GITHUB_REPOSITORY"
                                   printf "    COMMIT ID: %s\n" "$GITHUB_SHA"
-                                  printf "    DOCKER REPO: %s\n" "$DOCKER_HUB_REPO"
+                                  printf "    DOCKER HUB REPO: %s\n" "$github.DOCKER_HUB_REPO"
                                   printf "    GITHUB_ACTOR: %s\n" "$GITHUB_ACTOR"
                                   printf "    GITHUB_REPOSITORY: %s\n" "$GITHUB_REPOSITORY"
 
