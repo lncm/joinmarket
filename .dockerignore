@@ -1,0 +1,6 @@
+joinmarket.png
+
+# Build and readme files
+.github/*
+*.md
+.gilab-ci.yml
