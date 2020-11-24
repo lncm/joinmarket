@@ -33,6 +33,11 @@ def main():
     wallet_root_path = os.path.join(jm_single().datadir, "wallets")
     wallet_name = os.path.join(wallet_root_path, args[0])
     wallet = create_wallet(wallet_name, password, 4, SegwitLegacyWallet)
+    # Open file for writing
+    seedfile = open(os.path.join(jm_single().datadir, "jm-wallet-seed"), "w")
+    seedfile.write(wallet.get_mnemonic_words()[0])
+    seedfile.close()
+
     jmprint("recovery_seed:{}"
          .format(wallet.get_mnemonic_words()[0]), "important")
     wallet.close()
