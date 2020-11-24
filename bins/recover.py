@@ -20,12 +20,15 @@ from jmclient import load_program_config, add_base_options, SegwitLegacyWallet, 
 from jmbase.support import get_log, jmprint
 
 def main():
-    words = "seed-goes-here"
-    password = "password-goes-here".encode("utf-8")
-    words.strip()
-    entropy = SegwitLegacyWallet.entropy_from_mnemonic(words)
     load_program_config(config_path="/data/.joinmarket")
+    with open(os.path.join(jm_single().datadir, "jm-wallet-seed"), "r") as file:
+        words = file.read().replace('\n','')
+        words.strip()
+    with open(os.path.join(jm_single().datadir, "jm-wallet-password"), "r") as file:
+        password = file.read().replace('\n', '').encode("utf-8")
+    entropy = SegwitLegacyWallet.entropy_from_mnemonic(str(words))
     wallet_root_path = os.path.join(jm_single().datadir, "wallets")
+    # TODO: rename wallet2.jmdat back to wallet.jmdat
     wallet_name = os.path.join(wallet_root_path, "wallet2.jmdat")
     wallet = create_wallet(wallet_name, password, 4, SegwitLegacyWallet,
                            entropy=entropy,
