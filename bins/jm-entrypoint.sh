@@ -35,6 +35,11 @@ check_dependencies () {
 }
 check_dependencies pwgen
 
+run_normal_entrypoint () {
+    echo "Running joinmarketd (on port 27183)... "
+    /joinmarket-clientserver/scripts/joinmarketd.py 27183 0 127.0.0.1
+}
+
 # Copy config from template if doesn't exist
 if [ -f $HOME/joinmarket.cfg-dist ]; then
     # config doesnt exist
@@ -70,13 +75,14 @@ if [ ! -f $JMWALLETDIR/$JMWALLET ]; then
             exit 1
         fi
         echo "Wallet created"
+        run_normal_entrypoint
         exit 0
     else
         echo "Seed file exists! Recovering existing seed from filename ..."
         /usr/local/bin/recover.py $JMWALLET
+        run_normal_entrypoint
     fi
 else
-    echo "Wallet already created..starting joinmarketd"
-    /joinmarket-clientserver/scripts/joinmarketd.py 27183 0 127.0.0.1
+    run_normal_entrypoint
 fi
 # TODO: Display wallet
