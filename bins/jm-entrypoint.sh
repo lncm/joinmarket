@@ -73,7 +73,7 @@ if [ ! -f $JMWALLETDIR/$JMWALLET ]; then
         exit 0
     else
         echo "Seed file exists! Recovering existing seed ..."
-        /usr/local/bin/recovery.py
+        /usr/local/bin/recover.py
     fi
 else
     echo "Wallet already created..starting joinmarketd"
