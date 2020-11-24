@@ -60,7 +60,7 @@ if [ ! -f $JMWALLETDIR/$JMWALLET ]; then
     fi
     if [ ! -f $JMWALLETDIR/$JMSEEDFILE ]; then
         echo "Seed doesn't exist Creating wallet..."
-        WALLETOUT=`/usr/local/bin/genwallet.py $JMWALLET $GENPASS`
+        WALLETOUT=`echo $GENPASS | /usr/local/bin/genwallet.py $JMWALLET`
         RECOVERYSEED=$(echo "$WALLETOUT" | grep 'recovery_seed')
         # Check if seed was generated other return error
         if [[ ! -z $RECOVERYSEED ]]; then
