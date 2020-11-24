@@ -1,5 +1,8 @@
 # Joinmarket Docker Container
 
+
+[![gitlab pipeline status](https://gitlab.com/lncm/docker/joinmarket/badges/master/pipeline.svg)](https://gitlab.com/lncm/docker/joinmarket/-/commits/master) 
+
 ## What?
 
 This automates the process for Joinmarket in a nice docker Container
