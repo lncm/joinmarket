@@ -30,21 +30,14 @@ def main():
     parser = OptionParser(
     usage='usage: %prog [options] wallet_file_name password',
     description='Create a wallet with the given wallet name and password.')
-    add_base_options(parser)
     (options, args) = parser.parse_args()
-    # Get password from stdin or param 2
-    if options.wallet_password_stdin:
-        stdin = sys.stdin.read()
-        password = stdin.encode("utf-8")
-    else:
-        assert len(args) > 1, "must provide password via stdin (see --help), or as second argument."
-        password = args[1].encode("utf-8")
+
     # Load up defaults
-    load_program_config(config_path=options.datadir)
+    load_program_config(config_path='/data/.joinmarket')
     wallet_root_path = os.path.join(jm_single().datadir, "wallets")
     # get wallet from first argument
     wallet_name = os.path.join(wallet_root_path, args[0])
-    wallet = create_wallet(wallet_name, password, 4, SegwitLegacyWallet)
+    wallet = create_wallet(wallet_name, args[1].encode("utf-8"), 4, SegwitLegacyWallet)
     # Open file for writing
     seedfile = open(os.path.join(jm_single().datadir, "jm-wallet-seed"), "w")
     seedfile.write(wallet.get_mnemonic_words()[0])

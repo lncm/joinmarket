@@ -16,10 +16,16 @@ OTHER DEALINGS IN THE SOFTWARE.
 import sys
 import os
 
+from optparse import OptionParser
 from jmclient import load_program_config, add_base_options, SegwitLegacyWallet, create_wallet, jm_single
 from jmbase.support import get_log, jmprint
 
 def main():
+    parser = OptionParser(
+    usage='usage: %prog [options] wallet_file_name',
+    description='Create a wallet with the given wallet name')
+    (options, args) = parser.parse_args()
+
     load_program_config(config_path="/data/.joinmarket")
     with open(os.path.join(jm_single().datadir, "jm-wallet-seed"), "r") as file:
         words = file.read().replace('\n','')
