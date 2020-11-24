@@ -4,9 +4,18 @@
 Prototype: demonstrate you can automatically generate a wallet (using the base API
 https://github.com/JoinMarket-Org/joinmarket-clientserver/blob/master/jmclient/jmclient/wallet_utils.py)
 
-Credit goes to @nix-bitcoin (https://github.com/fort-nix/nix-bitcoin) for the initial POC
+Credit goes to @nix-bitcoin (https://github.com/fort-nix/nix-bitcoin) for the initial file
 
 output is seed as a JSON string
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
+
 """
 
 import sys
@@ -23,14 +32,17 @@ def main():
     description='Create a wallet with the given wallet name and password.')
     add_base_options(parser)
     (options, args) = parser.parse_args()
+    # Get password from stdin or param 2
     if options.wallet_password_stdin:
         stdin = sys.stdin.read()
         password = stdin.encode("utf-8")
     else:
         assert len(args) > 1, "must provide password via stdin (see --help), or as second argument."
         password = args[1].encode("utf-8")
+    # Load up defaults
     load_program_config(config_path=options.datadir)
     wallet_root_path = os.path.join(jm_single().datadir, "wallets")
+    # get wallet from first argument
     wallet_name = os.path.join(wallet_root_path, args[0])
     wallet = create_wallet(wallet_name, password, 4, SegwitLegacyWallet)
     # Open file for writing
