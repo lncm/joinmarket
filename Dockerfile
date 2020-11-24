@@ -33,7 +33,9 @@ RUN make install
 
 # Copy from base dir
 # namely genwallet.py which doesn't exist yet
-COPY ./bins/*.py /usr/local/bin
+COPY ./bins/genwallet.py /usr/local/bin
+COPY ./bins/recover.py /usr/local/bin
+
 # Entrypoint for joinmarket
 COPY ./bins/jm-entrypoint.sh /usr/local/bin
 
