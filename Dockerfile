@@ -51,6 +51,8 @@ RUN cp scripts/sendtomany.py /usr/local/bin
 RUN cp scripts/receive-payjoin.py /usr/local/bin
 RUN cp scripts/convert_old_wallet.py /usr/local/bin
 RUN cp scripts/tumbler.py /usr/local/bin
+RUN cp scripts/obwatch/ob-watcher.py /usr/local/bin
+RUN cp scripts/obwatch/orderbook.html /usr/local/bin
 
 RUN pip install -r "requirements/base.txt"
 
