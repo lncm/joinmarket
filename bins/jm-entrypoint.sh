@@ -58,18 +58,23 @@ if [ ! -f $JMWALLETDIR/$JMWALLET ]; then
         GENPASS=$(pwgen -s 21 -1 -v -c -0)
         echo $GENPASS > $JMWALLETPASS
     fi
-    echo "Creating wallet..."
-    WALLETOUT=`/usr/local/bin/genwallet.py $JMWALLET $GENPASS`
-    RECOVERYSEED=$(echo "$WALLETOUT" | grep 'recovery_seed')
-    if [[ ! -z $RECOVERYSEED ]]; then
-        SEEDONLY=`echo "$RECOVERYSEED" | cut -d ':' -f2`
-        echo $SEEDONLY > $JMSEEDFILE
+    if [ ! -f $JMWALLETDIR/$JMSEEDFILE ]; then
+        echo "Seed doesn't exist Creating wallet..."
+        WALLETOUT=`/usr/local/bin/genwallet.py $JMWALLET $GENPASS`
+        RECOVERYSEED=$(echo "$WALLETOUT" | grep 'recovery_seed')
+        # Check if seed was generated other return error
+        if [[ ! -z $RECOVERYSEED ]]; then
+            SEEDONLY=`echo "$RECOVERYSEED" | cut -d ':' -f2`
+        else
+            echo "Error generating wallet"
+            exit 1
+        fi
+        echo "Wallet created"
+        exit 0
     else
-        echo "Error generating wallet"
-        exit 1
+        echo "Seed file exists! Recovering existing seed ..."
+        /usr/local/bin/recovery.py
     fi
-    echo "Wallet created"
-    exit 0
 else
     echo "Wallet already created..starting joinmarketd"
     /joinmarket-clientserver/scripts/joinmarketd.py 27183 0 127.0.0.1
