@@ -71,6 +71,7 @@ if [ ! -f $JMWALLETDIR/$JMWALLET ]; then
     echo "Wallet created"
     exit 0
 else
-    echo "Wallet already created"
+    echo "Wallet already created..starting joinmarketd"
+    /joinmarket-clientserver/scripts/joinmarketd.py 27183 0 127.0.0.1
 fi
 # TODO: Display wallet
