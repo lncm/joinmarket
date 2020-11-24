@@ -28,8 +28,7 @@ def main():
         password = file.read().replace('\n', '').encode("utf-8")
     entropy = SegwitLegacyWallet.entropy_from_mnemonic(str(words))
     wallet_root_path = os.path.join(jm_single().datadir, "wallets")
-    # TODO: rename wallet2.jmdat back to wallet.jmdat
-    wallet_name = os.path.join(wallet_root_path, "wallet2.jmdat")
+    wallet_name = os.path.join(wallet_root_path, "wallet.jmdat")
     wallet = create_wallet(wallet_name, password, 4, SegwitLegacyWallet,
                            entropy=entropy,
                            entropy_extension=None)
