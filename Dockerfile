@@ -6,7 +6,7 @@
 # ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 # OTHER DEALINGS IN THE SOFTWARE.
 
-ARG VERSION=v0.7.0
+ARG VERSION=v0.7.2
 ARG REPO=https://github.com/JoinMarket-Org/joinmarket-clientserver
 ARG USER=joinmarket
 ARG DIR=/data/
