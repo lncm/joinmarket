@@ -1,0 +1,52 @@
+# Based on https://github.com/JoinMarket-Org/joinmarket-clientserver/blob/master/jmclient/jmclient/configure.py
+
+[DAEMON]
+no_daemon = 0
+daemon_port = 27183
+daemon_host = localhost
+use_ssl = false
+
+[BLOCKCHAIN]
+blockchain_source = bitcoin-rpc
+network = mainnet
+rpc_host = RPCHOST
+rpc_port = RPCPORT
+rpc_user = RPCUSER
+rpc_password = RPCPASS
+
+[MESSAGING:server1]
+host = darksci3bfoka7tw.onion
+channel = joinmarket-pit
+port = 6697
+usessl = true
+socks5 = true
+socks5_host = TORADDR
+socks5_port = 9050
+
+[MESSAGING:server2]
+host = ncwkrwxpq2ikcngxq3dy2xctuheniggtqeibvgofixpzvrwpa77tozqd.onion
+channel = joinmarket-pit
+port = 6667
+usessl = false
+socks5 = true
+socks5_host =  TORADDR
+socks5_port = 9050
+
+[LOGGING]
+console_log_level = INFO
+color = false
+
+[POLICY]
+segwit = true
+native = false
+merge_algorithm = default
+tx_fees = 3
+absurd_fee_per_kb = 350000
+tx_broadcast = self
+minimum_makers = 4
+max_sats_freeze_reuse = -1
+taker_utxo_retries = 3
+taker_utxo_age = 5
+taker_utxo_amtpercent = 20
+accept_commitment_broadcasts = 1
+commit_file_location = cmtdata/commitments.json
