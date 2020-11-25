@@ -5,13 +5,14 @@
 
 ## What?
 
-This automates the process for Joinmarket in a nice docker Container
+This automates the process for [Joinmarket](https://github.com/JoinMarket-Org/joinmarket-clientserver
+) in a nice docker container.
 
 ## Why?
 
-* Ease of use
-* Everyone should put their full node to use
-* Everyone should mix
+* Ease of use (Create and Restore Wallet should be automated, as well as being able to add and remove their own funds)
+* Everyone should run and use their full node to use. Your full node supports the network and supports your privacy
+* Everyone should mix and protect their privacy
 * Everyone should be able to be a market maker (fuck DEFI, bitcoin is the real DEFI)
 
 ## Usage Notes
@@ -38,7 +39,7 @@ docker run --rm  -it --network host \
         --name joinmarket \
         -e RPCPASS="btcrpcpassword" \
         -e RPCUSER="bitcoindrpcuser" \ 
-        lncm/joinmarket
+        lncm/joinmarket:v0.7.2
 
 ```
 
@@ -55,7 +56,7 @@ docker run --rm  -it --network host \
         -v $HOME/.bitcoin:/data/.bitcoin \
         --entrypoint="/joinmarket-clientserver/scripts/wallet-tool.py" \
         --name joinmarket \
-        lncm/joinmarket:v0.7.0 $PARAM
+        lncm/joinmarket:v0.7.2 $PARAM
 ```
 
 ## Build Notes
@@ -79,5 +80,5 @@ docker build -t lncm/joinmarket .
 ### Inspecting the Container
 
 ```
-docker run --rm --entrypoint="/bin/bash" -it lncm/joinmarket:v0.7.0
+docker run --rm --entrypoint="/bin/bash" -it lncm/joinmarket:v0.7.2
 ```
