@@ -15,6 +15,11 @@ This automates the process for [Joinmarket](https://github.com/JoinMarket-Org/jo
 * Everyone should mix and protect their privacy
 * Everyone should be able to be a market maker (fuck DEFI, bitcoin is the real DEFI)
 
+## Project Git Mirrors
+
+* [Github](https://github.com/lncm/joinmarket)
+* [GitLab](https://gitlab.com/lncm/docker/joinmarket)
+
 ## Usage Notes
 
 ### Environment variables
