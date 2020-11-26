@@ -21,7 +21,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 import sys
 import os
 from optparse import OptionParser
-from jmclient import load_program_config, add_base_options, SegwitLegacyWallet, create_wallet, jm_single
+from jmclient import load_program_config, add_base_options, SegwitWallet, SegwitLegacyWallet, create_wallet, jm_single
 from jmbase.support import get_log, jmprint
 
 log = get_log()
@@ -37,7 +37,7 @@ def main():
     wallet_root_path = os.path.join(jm_single().datadir, "wallets")
     # get wallet from first argument
     wallet_name = os.path.join(wallet_root_path, args[0])
-    wallet = create_wallet(wallet_name, args[1].encode("utf-8"), 4, SegwitLegacyWallet)
+    wallet = create_wallet(wallet_name, args[1].encode("utf-8"), 4, SegwitWallet)
     # Open file for writing
     seedfile = open(os.path.join(jm_single().datadir, "jm-wallet-seed"), "w")
     seedfile.write(wallet.get_mnemonic_words()[0])

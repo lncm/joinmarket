@@ -17,7 +17,7 @@ import sys
 import os
 
 from optparse import OptionParser
-from jmclient import load_program_config, add_base_options, SegwitLegacyWallet, create_wallet, jm_single
+from jmclient import load_program_config, add_base_options, SegwitWallet, SegwitLegacyWallet, create_wallet, jm_single
 from jmbase.support import get_log, jmprint
 
 def main():
@@ -36,7 +36,7 @@ def main():
     wallet_root_path = os.path.join(jm_single().datadir, "wallets")
     # add wallet as first argument
     wallet_name = os.path.join(wallet_root_path, args[0])
-    wallet = create_wallet(wallet_name, password, 4, SegwitLegacyWallet,
+    wallet = create_wallet(wallet_name, password, 4, SegwitWallet,
                            entropy=entropy,
                            entropy_extension=None)
     jmprint("recovery_seed:{}"
