@@ -1,5 +1,8 @@
+# Git
+.gitignore
+test-wallet.sh
+# PNG
 joinmarket.png
-
 # Build and readme files
 .github/*
 *.md
