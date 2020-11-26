@@ -41,6 +41,7 @@ def main():
     # Open file for writing
     seedfile = open(os.path.join(jm_single().datadir, "jm-wallet-seed"), "w")
     seedfile.write(wallet.get_mnemonic_words()[0])
+    seedfile.write("\n")
     seedfile.close()
 
     jmprint("recovery_seed:{}"
