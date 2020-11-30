@@ -44,7 +44,7 @@ docker run --rm  -it --network host \
         --name joinmarket \
         -e RPCPASS="btcrpcpassword" \
         -e RPCUSER="bitcoindrpcuser" \ 
-        lncm/joinmarket:v0.7.2
+        lncm/joinmarket:v0.8.0
 
 ```
 
@@ -85,5 +85,5 @@ docker build -t lncm/joinmarket .
 ### Inspecting the Container
 
 ```
-docker run --rm --entrypoint="/bin/bash" -it lncm/joinmarket:v0.7.2
+docker run --rm --entrypoint="/bin/bash" -it lncm/joinmarket:v0.8.0
 ```
