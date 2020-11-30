@@ -1,1 +1,2 @@
-test-wallet.sh
+test-*.sh
+docker-compose.yml
