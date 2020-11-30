@@ -44,14 +44,15 @@ WORKDIR /joinmarket-clientserver
 RUN git checkout $VERSION
 
 # Copy some useful utils into /usr/local/bin
-RUN cp scripts/yg-privacyenhanced.py /usr/local/bin
-RUN cp scripts/wallet-tool.py /usr/local/bin
-RUN cp scripts/add-utxo.py /usr/local/bin
-RUN cp scripts/sendpayment.py /usr/local/bin
-RUN cp scripts/sendtomany.py /usr/local/bin
-RUN cp scripts/receive-payjoin.py /usr/local/bin
-RUN cp scripts/convert_old_wallet.py /usr/local/bin
-RUN cp scripts/tumbler.py /usr/local/bin
+RUN cp scripts/yg-privacyenhanced.py /usr/local/bin \
+    cp scripts/wallet-tool.py /usr/local/bin \
+    cp scripts/add-utxo.py /usr/local/bin \
+    cp scripts/sendpayment.py /usr/local/bin \
+    cp scripts/sendtomany.py /usr/local/bin \
+    cp scripts/receive-payjoin.py /usr/local/bin \
+    cp scripts/convert_old_wallet.py /usr/local/bin \
+    cp scripts/tumbler.py /usr/local/bin \
+    cp -fr scripts/obwatch /usr/local/bin
 
 RUN pip install -r "requirements/base.txt"
 
