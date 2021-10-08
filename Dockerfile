@@ -19,7 +19,9 @@ ARG VERSION
 ARG REPO
 
 # Setup dependencies
-RUN apt-get update && apt-get -y install python3-dev python3-pip git build-essential automake pkg-config libtool libffi-dev libssl-dev libgmp-dev libsodium-dev pwgen
+RUN apt-get update && apt-get install -y --no-install-recommends python3-dev python3-pip git build-essential automake pkg-config libtool libffi-dev libssl-dev libgmp-dev libsodium-dev pwgen &&
+    apt-get clean &&
+    rm -rf /var/lib/apt/lists/*
 WORKDIR /
 RUN git clone https://github.com/bitcoin-core/secp256k1.git
 RUN git clone $REPO
@@ -59,10 +61,9 @@ ARG USER
 ARG DIR
 
 RUN adduser --disabled-password \
-            --home "$DIR" \
-            --gecos "" \
-            "$USER"
-
+    --home "$DIR" \
+    --gecos "" \
+    "$USER"
 
 USER $USER
 RUN mkdir -p $DIR/.joinmarket
@@ -75,4 +76,3 @@ WORKDIR $DIR
 # Default to joinmarketd
 #ENTRYPOINT ["/joinmarket-clientserver/joinmarketd.py", "27183" , "0" , "127.0.0.1"]
 ENTRYPOINT ["jm-entrypoint.sh"]
-
